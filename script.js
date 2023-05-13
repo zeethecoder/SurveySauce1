@@ -5,7 +5,8 @@ const feedbackList = document.querySelector('.feedbacks');
 const submitBtnel = document.querySelector('.submit-btn__text');
 const counterEl = document.querySelector('#current-left');
 const spinnerEl = document.querySelector('.spinner');
-const hashtagList = document.querySelector('.')
+const hashtagList = document.querySelector('.hashtags');
+const hashtagButtons = document.querySelectorAll('hashtag');
 const max_CHARACTERS = 150;
 const renderfeedbackHTML = (eachItem) => {
     const hashtagHTML = `
@@ -211,3 +212,30 @@ fetch('https://bytegrad.com/course-assets/js/1/api/feedbacks')
         feedbackList.textContent = `Failed to load data: ${error.message}`;
         // customize error with html css connected element stored in js varible 
     });
+
+    hashtagEvent = (event) => {
+        const clickedHashtag = event.target;
+
+        if (clickedHashtag.className.includes('hashtags')) return;
+
+        const companyNameFromHastag = clickedHashtag.textContent.substring(1).toLowerCase().trim();
+
+        feedbackList.childNodes.forEach(childNode => {
+
+
+            if(childNode.nodeType === 3) return;
+
+            const companyNameFromFeedbackItem = childNode.querySelector('.feedback__company').textContent.toLowerCase().trim();
+
+            if(companyNameFromHastag !== companyNameFromFeedbackItem) {
+                childNode.remove();
+            }else{
+                clickedHashtag
+            }
+        });
+        
+        
+    }
+
+    
+    hashtagList.addEventListener('click', hashtagEvent);

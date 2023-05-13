@@ -1,0 +1,13 @@
+if (clickedHashtag.className.includes('hashtags')) return;
+
+        const companyNameFromHastag = clickedHashtag.textContent.substring(1).toLowerCase().trim();
+
+        feedbackList.childNodes.forEach(childNode => {
+            if(childNode === 3) return;
+        })
+
+        const companyNameFromFeedbackItem = childNode.querySelector('feedback_company').textContent.substring(1).toLowerCase().trim();
+        
+        if( companyNameFromHastag !== companyNameFromFeedbackItem) {
+            childNode.remove();
+        }
